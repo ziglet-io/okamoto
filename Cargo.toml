@@ -1,0 +1,38 @@
+[package]
+name = "okamoto"
+version = "0.1.0"
+edition = "2021"
+authors = ["Jeff Hohenstein <jeffrey.hohenstein@gmail.com>"]
+description = "Okamoto (2006) Blind Signatures"
+homepage = "https://github.com/saltatory/okamoto"
+repository = "https://github.com/saltatory/okamoto"
+license = "GPL-3.0-only"
+
+[dependencies]
+bls12_381 = { version = "0.8.0", features = ["default"], optional = true }
+ff = "0.13.0"
+rand = "0.8.5"
+
+[features]
+default = ["bls12_381_plain"]
+bls12_381_plain = ["bls12_381"]
+bls12_381_crs = ["bls12_381"]
+
+# Add rendering of LaTeX math symbols in documentation
+#
+# Example: to generate docs locally
+#
+# RUSTDOCFLAGS="--html-in-header $(pwd)/katex-header.html"
+[package.metadata.docs.rs]
+rustdoc-args = ["--html-in-header", "katex-header.html"]
+
+[[bench]]
+name = "bench"
+harness = false
+
+[profile.bench]
+debug = true
+
+[dev-dependencies]
+criterion = "0.5.1"
+simple_logger = "5.0.0"
