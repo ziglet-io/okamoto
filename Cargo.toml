@@ -3,10 +3,12 @@ name = "okamoto"
 description = "Okamoto (2006) Blind Signatures"
 homepage = "https://github.com/saltatory/okamoto"
 repository = "https://github.com/saltatory/okamoto"
-version = "0.1.1"
-edition = "2021"
-authors = ["Jeffrey Hohenstein <jeffrey.hohenstein@gmail.com>"]
-license = "BUSL-1.1"
+readme = "README.md"
+
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license-file.workspace = true
 
 [dependencies]
 bls12_381 = {workspace = true, features = ["default"], optional = true }
@@ -31,5 +33,5 @@ name = "bench"
 harness = false
 
 [dev-dependencies]
-criterion = "0.5.1"
-simple_logger = "5.0.0"
+criterion.workspace = true
+simple_logger.workspace = true
