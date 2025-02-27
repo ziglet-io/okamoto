@@ -4,7 +4,7 @@ use criterion::{criterion_group, criterion_main, Criterion};
 use ff::Field;
 use rand::prelude::ThreadRng;
 use simple_logger::SimpleLogger;
-use okamoto::bls12_381_plain::{verify_signature, KeyPair, Signer, User};
+use ziglet_okamoto::bls12_381_plain::{verify_signature, KeyPair, Signer, User};
 
 #[allow(non_snake_case)]
 fn bench(criterion: &mut Criterion) {
