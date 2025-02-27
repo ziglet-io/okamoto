@@ -1,8 +1,8 @@
 [package]
-name = "okamoto"
+name = "ziglet-okamoto"
 description = "Okamoto (2006) Blind Signatures"
-homepage = "https://github.com/saltatory/okamoto"
-repository = "https://github.com/saltatory/okamoto"
+homepage = "https://github.com/ziglet-io/okamoto"
+repository = "https://github.com/ziglet-io/okamoto"
 readme = "README.md"
 
 version.workspace = true
