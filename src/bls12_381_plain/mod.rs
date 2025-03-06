@@ -5,7 +5,7 @@
 //! #![allow(non_snake_case)]
 //! use bls12_381::Scalar;
 //! use ff::Field;
-//! use okamoto::bls12_381_plain::{Error, KeyPair, Signer, User};
+//! use ziglet_okamoto::bls12_381_plain::{Error, KeyPair, Signer, User};
 //!
 //! fn happy_path() -> Result<(), Error> {
 //!     // Setup
@@ -44,7 +44,7 @@
 //!
 //! ```
 
-use bls12_381::{G1Affine, G1Projective, G2Projective, Scalar, G2Affine};
+use bls12_381::{G1Affine, G1Projective, G2Affine, G2Projective, Scalar};
 use ff::Field;
 use rand::RngCore;
 
