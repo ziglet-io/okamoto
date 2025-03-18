@@ -9,7 +9,7 @@
 //!
 //! fn happy_path() -> Result<(), Error> {
 //!     // Setup
-//!     let mut rng = rand::thread_rng();
+//!     let mut rng = rand_core::OsRng;
 //!     let key_pair = KeyPair::generate(rng.clone());
 //!     let mut user = User::new(&key_pair.public_key, rng.clone());
 //!     let mut signer = Signer::new(&key_pair, rng.clone());
@@ -40,13 +40,11 @@
 //! }
 //!
 //! happy_path().expect("successful completion");
-//!
-//!
 //! ```
 
 use bls12_381::{G1Affine, G1Projective, G2Affine, G2Projective, Scalar};
 use ff::Field;
-use rand::RngCore;
+use rand_core::RngCore;
 
 pub type SecretKey = Scalar;
 
@@ -133,10 +131,7 @@ impl KeyPair {
             if public_key.v1 == G1Affine::generator() {
                 continue;
             }
-            if public_key.v1 != public_key.g1
-                && public_key.v1 != public_key.h1
-                && public_key.v1 != public_key.u1
-            {
+            if public_key.v1 != public_key.g1 && public_key.v1 != public_key.h1 && public_key.v1 != public_key.u1 {
                 break;
             }
         }
@@ -147,10 +142,7 @@ impl KeyPair {
         public_key.v2 = G2Affine::from(G2Projective::generator() * v1_r);
         public_key.w2 = G2Affine::from(public_key.g2 * secret_key);
 
-        let key_pair = KeyPair {
-            secret_key,
-            public_key,
-        };
+        let key_pair = KeyPair { secret_key, public_key };
 
         key_pair
     }
@@ -513,12 +505,7 @@ impl<'a, R: RngCore> User<'a, R> {
     /// # Returns
     /// $(\sigma, \alpha, \beta)$
     #[allow(non_snake_case)]
-    pub fn sign(
-        &mut self,
-        Y: &G1Affine,
-        R: &G2Affine,
-        l: &Scalar,
-    ) -> Result<(G1Affine, G2Affine, Scalar), Error> {
+    pub fn sign(&mut self, Y: &G1Affine, R: &G2Affine, l: &Scalar) -> Result<(G1Affine, G2Affine, Scalar), Error> {
         match self.state {
             UserState::ReadyToSign => {}
             _ => return Err(Error::InvalidState),
@@ -561,7 +548,6 @@ impl<'a, R: RngCore> User<'a, R> {
 /// * $\beta \in \mathbb{Z}_p$
 ///
 /// * $e(\sigma,w_2\alpha) = e(g_1,{h_2}^{m_0}{g_2}^{m_1}{u_2}{v_2}^{\beta})$
-///
 pub fn verify_signature(
     public_key: &PublicKey,
     m0: &Scalar,
@@ -571,9 +557,7 @@ pub fn verify_signature(
     beta: &Scalar,
 ) -> Result<(), Error> {
     let lhs2 = G2Affine::from(G2Projective::from(public_key.w2) + alpha);
-    let rhs2 = G2Affine::from(
-        public_key.h2 * m0 + public_key.g2 * m1 + public_key.u2 + public_key.v2 * beta,
-    );
+    let rhs2 = G2Affine::from(public_key.h2 * m0 + public_key.g2 * m1 + public_key.u2 + public_key.v2 * beta);
     let lhs = bls12_381::pairing(&sigma, &lhs2);
     let rhs = bls12_381::pairing(&public_key.g1, &rhs2);
 

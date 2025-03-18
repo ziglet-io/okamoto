@@ -11,9 +11,9 @@ authors.workspace = true
 license-file.workspace = true
 
 [dependencies]
-bls12_381 = {workspace = true, features = ["default"], optional = true }
-ff = {workspace = true}
-rand = {workspace = true}
+bls12_381 = { workspace = true, features = ["default"], optional = true }
+ff = { workspace = true }
+rand_core = { version = "0.6.4", features = ["getrandom"] }
 
 [features]
 default = ["bls12_381_plain"]
