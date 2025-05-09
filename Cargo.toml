@@ -1,6 +1,6 @@
 [package]
 name = "ziglet-okamoto"
-description = "Okamoto (2006) Blind Signatures"
+description = "Okamoto (2008) Blind Signatures"
 homepage = "https://github.com/ziglet-io/okamoto"
 repository = "https://github.com/ziglet-io/okamoto"
 readme = "README.md"
