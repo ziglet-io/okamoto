@@ -52,7 +52,7 @@ Using algorithms from:
 
 # Licensing
 
-* [BUSL](./LICENSE.md)
+* MIT
 
 # Copyright
 
