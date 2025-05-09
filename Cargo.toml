@@ -4,15 +4,14 @@ description = "Okamoto (2008) Blind Signatures"
 homepage = "https://github.com/ziglet-io/okamoto"
 repository = "https://github.com/ziglet-io/okamoto"
 readme = "README.md"
-
-version.workspace = true
-edition.workspace = true
-authors.workspace = true
-license-file.workspace = true
+version = "0.1.0"
+edition = "2021"
+authors = ["Jeffrey Hohenstein <jeffrey.hohenstein@gmail.com>"]
+license-file = "LICENSE.md"
 
 [dependencies]
-bls12_381 = { workspace = true, features = ["default"], optional = true }
-ff = { workspace = true }
+bls12_381 = { version = "0.8.0", features = ["default"], optional = true }
+ff = {version = "0.13.0"}
 rand_core = { version = "0.6.4", features = ["getrandom"] }
 
 [features]
